@@ -1,0 +1,13 @@
+{
+  "name": "catImages",
+  "version": "1.0.0",
+  "description": "Cat image generator",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

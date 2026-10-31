@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Cat Generator</title>
+
+<style>
+
+     * {
+        box-sizing: border-box;
+     }
+
+    body {
+        font-family: Arial, sans-serif;
+         background: #f4f4f4;
+         text-align: center;
+        padding: 40px 15px;
+         margin: 0;
+        }
+
+    .container {
+        background: white;
+         max-width: 500px;
+         margin: 40px auto;
+          padding: 30px;
+         border-radius: 12px;
+         box-shadow: 0 4px 12px black;
+        }
+ 
+     img {
+        width: 100%;
+        max-height: 350px;
+        object-fit: contain;
+        margin: 20px 0;
+        border-radius: 10px;
+        }
+
+    button {
+        background: lightblue;
+        color: white;
+        border: none;
+        padding: 14px 25px;
+        font-size: 16px;
+        border-radius: 8px;
+        }
+
+    #message {
+        min-height: 24px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Random Cat Generator</h1>
+        <img id="CatIm" src="" alt="CatRa" style="display: none;">
+        <p id="message"></p>
+        <button id="generate" onclick="generateCat()">
+            Generate Random Cat
+        </button>
+    </div>
+
+    <script>
+
+        async function generateCat() {
+
+            const image = document.getElementById("CatIm");
+            const message = document.getElementById("message");
+            const button = document.getElementById("generate");
+            button.disabled = true;
+            message.textContent = "Loading";
+
+            try {
+                const response = await fetch("/api/cat");
+                if (!response.ok) {
+                    throw new Error("Can't get cat image");
+                }
+
+                const data = await response.json();
+
+                image.src = data.image;
+                image.style.display = "block";
+                message.textContent = "Loaded";
+
+            } catch (error) {
+                message.textContent =
+                    "Please try again.";
+
+            } finally {
+                button.disabled = false;
+            }
+
+        }
+</script>
+</body>
+</html>
