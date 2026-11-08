@@ -43,7 +43,7 @@ test("Website loads", async () => {
         const response = await fetch(`${baseUrl}/`);
         const html = await response.text();
         assert.strictEqual(response.status, 200);
-        assert.ok(html.includes("Random Cat Generator"));
+        assert.ok(html.includes("Purrfect Picture"));
         assert.ok(html.includes("generateCat"));
     } finally {
         await new Promise(resolve => server.close(resolve));
